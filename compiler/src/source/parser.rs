@@ -1,0 +1,202 @@
+//mod entryType;
+//mod entry;
+//mod token;
+
+use super::token::Token;
+use super::entry::Entry;
+use super::entryType::EntryType;
+use std::collections::LinkedList;
+
+pub struct Parser{
+	pub entryRegister: LinkedList<Entry>
+}
+
+impl Parser {
+	pub fn parse(&self, tokenList: &LinkedList<Token>) -> Entry {
+		let mut c: Vec<String> = Vec::new();
+		let mut e: Entry;
+
+		//Switches
+		let mut isSection = false;
+		let mut isAttribute = false;
+		let mut isCommand = false;
+		let mut isAssignment = false;
+
+		let mut wasLt = false;		
+		let mut wasDig = false;
+
+		let mut bracketOpened = false;
+		let mut bracketClosed = false;
+		
+		let mut qtOpened = false;
+		let mut qtClosed = false;
+	
+		//Buffer
+		let mut wordBuf = String::new();
+		let mut numBuf = String::new();
+		let mut typeBuf: EntryType = EntryType::NUL;
+	
+		for i in tokenList.iter() {
+			//i.printToken();
+			match i{
+				Token::HASH => isSection = true,
+				Token::DASH => isAttribute = true,
+				Token::OB => bracketOpened = true,
+
+				Token::CB => {
+					if bracketOpened {
+						if wasDig {
+							c.push(numBuf);
+							numBuf = String::new();
+							wasDig = false;
+						}
+
+						if wasLt {
+							c.push(wordBuf);
+							wordBuf = String::new();
+							wasLt = false;
+						}
+
+						bracketOpened = false;
+						bracketClosed = true;
+					}
+
+					else {
+						panic!("Closing nonexistent bracket!\n");
+					}
+				},
+
+				Token::QT => {
+					if !qtOpened {
+						qtOpened = true;
+					}
+
+
+					else {
+						if qtOpened && !qtClosed{
+							if wasLt{ 
+								qtOpened = false;
+								qtClosed = true;
+								c.push(wordBuf);
+								wordBuf = String::new();
+								wasLt = false;
+							}
+
+							else {
+								panic!("Empty string not allowed!");
+							}
+
+						}
+
+						else {
+							panic!("Too many quotes");
+						}
+					}
+				},
+
+				Token::COM => {
+					if wasDig {
+						c.push(numBuf);
+						numBuf = String::new();
+						wasDig = false;
+					}
+
+					if wasLt {
+						c.push(wordBuf);
+						wordBuf = String::new();
+						wasLt = false;
+					}
+				},
+				Token::COL => {
+					if wasLt {
+						if isAttribute {
+							c.push(wordBuf);
+							wordBuf = String::new();
+						}
+					
+						else {
+							isAssignment = true;
+							c.push(wordBuf);
+							wordBuf = String::new();
+						}	
+
+						wasLt = false;
+					}
+
+
+					if bracketOpened == false && bracketClosed {
+						isCommand = true;
+					}
+
+
+				},
+
+				Token::LT(x) => {
+
+					if wasLt == false {
+						wasLt = true;
+						wordBuf = String::from("");
+					}
+
+					wordBuf += x;
+				},
+
+				Token::DIG(x) => {
+					if wasDig == false {
+						wasDig = true;
+						numBuf = String::from("");
+					}
+
+					numBuf += x;
+				},
+
+				
+
+				_ => {
+					if i.compare(Token::SPACE) == false {
+						panic!("Unknown symbol found!");
+					}
+				}
+			}
+		}
+
+		
+		if isSection {
+			c.push(wordBuf);
+			typeBuf = EntryType::SECTION;
+		}
+
+		if isAttribute || isAssignment{
+			c.push(numBuf);
+
+			if isAssignment {
+				typeBuf = EntryType::ASSIGN;
+			}
+
+			else {
+				typeBuf = EntryType::ATTR;
+			}
+		}
+
+		if isCommand {
+			typeBuf = EntryType::COMMAND;
+		}
+		
+		e = Entry{kind: typeBuf, content: c};
+
+		return e;
+	}
+
+	
+	pub fn addEntry(&mut self, e: Entry) {
+		self.entryRegister.push_back(e);
+	}
+
+
+	pub fn printList(&self, l: &LinkedList<Entry>) {
+		for i in l.iter() {
+			i.printEntry();
+		}
+	}
+}
+
