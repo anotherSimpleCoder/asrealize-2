@@ -2,5 +2,6 @@ enum entryType{
 	SEC,	
 	ATTR,
 	ASGN,
-	COM
+	COM,
+	NL
 };

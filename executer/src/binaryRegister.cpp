@@ -5,7 +5,7 @@
 
 using namespace std;
 
-void processValues(binaryRegister* b, std::vector<entry>* regBuf) {
+std::vector<entry> processValues(binaryRegister* b) {
 	std::vector<entry> entryRegister;
 
 	int size = b->reg.size();
@@ -17,9 +17,9 @@ void processValues(binaryRegister* b, std::vector<entry>* regBuf) {
 	bool isHeight = false;
 	bool isTitle = false;
 
-	bool isAssign = true;
-	bool isCommand = true;
-	bool isAlpha = true;
+	bool isAssign = false;
+	bool isCommand = false;
+	bool isAlpha = false;
 
 	entry height;
 	entry width;
@@ -31,8 +31,16 @@ void processValues(binaryRegister* b, std::vector<entry>* regBuf) {
 
 		switch(entry) {
 			case SEC_META:
-				isMeta = true;
-				break;
+				if(!isMeta) {
+					isMeta = true;
+					e.type = entryType::SEC;
+					e.content.push_back(SEC_META);
+					entryRegister.push_back(e);
+					e.content.clear();
+					break;
+				}
+
+
 
 			case ATTR_HEIGHT:
 				if(isMeta) {
@@ -77,9 +85,6 @@ void processValues(binaryRegister* b, std::vector<entry>* regBuf) {
 
 			case SEC_BODY:
 				if(isMeta) {
-					e.type = entryType::SEC;
-					e.content.push_back(SEC_META);
-					entryRegister.push_back(e);
 					entryRegister.push_back(height);
 					entryRegister.push_back(width);
 					entryRegister.push_back(title);
@@ -87,26 +92,31 @@ void processValues(binaryRegister* b, std::vector<entry>* regBuf) {
 					isBody = true;
 					e.type = entryType::SEC;
 					e.content.push_back(SEC_BODY);
-					entryRegister.push_back(e);		
+					entryRegister.push_back(e);
+					e.content.clear();		
 				}
 				break;
 
 			case ASSIGN:
 				if(isBody) {
 					if(!isAssign) {
+						e.content.clear();
 						isAssign = true;
 						e.type = entryType::ASGN;
+						break;
 					}
 
 					else {
 						isAssign = false;
 						entryRegister.push_back(e);
+						break;
 					}
 				}
-				break;
+				//break;
 
 			case ALPHABETIC:
 				if(isAlpha) {
+					e.content.push_back(ALPHABETIC);
 					isAlpha = false;
 				}
 
@@ -120,13 +130,19 @@ void processValues(binaryRegister* b, std::vector<entry>* regBuf) {
 					if(isCommand) {
 						entryRegister.push_back(e);
 						isCommand = false;
+						break;
 					}
 
 					else{
+						e.content.clear();
 						isCommand = true;
 						e.type = entryType::COM;
+						break;
 					}
 				}
+
+			case NUL:
+				break;
 
 			default:
 				if(isMeta) {
@@ -153,10 +169,11 @@ void processValues(binaryRegister* b, std::vector<entry>* regBuf) {
 						e.content.push_back(entry);
 					}
 				}
+				break;
 		}
 	}
 
-	regBuf = &entryRegister;
+	return entryRegister;
 }
 
 void printContentToTokens(binaryRegister* b) {
@@ -212,6 +229,6 @@ void printRegisterContent(binaryRegister* b) {
 	int size = b->reg.size();
 
 	for(int i = 0; i < size; i++) {
-		cout << b->reg[i] << endl;
+		cout << std::hex << b->reg[i] << endl;
 	}
 }

@@ -7,8 +7,7 @@ using namespace std;
 
 int main(int argc, char** argv) {
 	fileReader f = {NULL};
-	binaryRegister b;
-	executer e;	
+	binaryRegister b;	
 //	std::vector<entry> reg;
 
 	read(&f, "test.asb");
@@ -18,8 +17,8 @@ int main(int argc, char** argv) {
 //	printRegisterContent(&b);
 //	printContentToTokens(&b);	
 	std::vector<entry> reg = processValues(&b);	
-//	printRegister(reg);
-	execute(&e, reg);
+	printRegister(reg);
+
 	
 	return EXIT_SUCCESS;	
 }

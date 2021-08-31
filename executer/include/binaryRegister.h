@@ -9,6 +9,6 @@ struct binaryRegister {
 
 typedef struct binaryRegister binaryRegister;
 
-void printRegister(binaryRegister* b);
+void printRegisterContent(binaryRegister* b);
 void printContentToTokens(binaryRegister* b);
-void processValues(binaryRegister* b, std::vector<entry>* regBuf);
+std::vector<entry> processValues(binaryRegister* b);
