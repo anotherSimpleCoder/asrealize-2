@@ -42,6 +42,8 @@ void execute(executer* e, std::vector<entry> r) {
 		string nameBuf = "";
 		int amount = 0;
 
+		int values[6];
+
 		if(r[4].content[0] == SEC_BODY) {
 			for(int i = 5; i < size; i++) {
 				e_buf = r[i];
@@ -71,13 +73,13 @@ void execute(executer* e, std::vector<entry> r) {
 
 
 					case entryType::COM:
-						x = 0;
-						y = 0;
+						//x = 0;
+						//y = 0;
 
-						red = 0;
-						green = 0;
-						blue = 0;
-						alpha = 0;
+						//red = 0;
+						//green = 0;
+						//blue = 0;
+						//alpha = 0;
 
 						contentSize = e_buf.content.size();
 						
@@ -90,19 +92,31 @@ void execute(executer* e, std::vector<entry> r) {
 								i++;
 								nameBuf = constructString(e_buf.content, i, &end);
 								i = end;
-								cout << << nameBuf << endl;
+								//cout << << nameBuf << endl;
 								//get val and store
-								amount++;
+
+								if(e->variables.find(varName) != e->variables.end()) {
+									values[amount] = e->variables[nameBuf];
+									amount++;	
+								}
+								//amount++;
 							}
 
 							else {
 								//get val and store
-								cout << (int)e_buf.content[i] << endl;
+								//cout << (int)e_buf.content[i] << endl;
+								values[amount] = e_buf.content[i];
 								amount++;
 							}
+
 						}
 
-						cout << amount << endl;
+						//TODO: there is still somethin wrong with fetching values
+						for(int i = 0; i < 6; i++) {
+							cout << values[i] << endl;
+						}
+
+						//cout << amount << endl;
 						break;
 
 
