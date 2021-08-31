@@ -1,8 +1,11 @@
 #include "entryType.h"
 
+using namespace std;
 
 //TODO: Stilltodo
 struct entry {
-	entryType e;
-	std::vector<
-}
+	entryType type;
+	std::vector<uint16_t> content;
+};
+
+typedef struct entry entry;

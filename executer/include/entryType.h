@@ -1,6 +1,6 @@
 enum entryType{
-	SECTION,	
-	ATTRIBUTE,
-	ASSIGN,
-	COMMAND
-}
+	SEC,	
+	ATTR,
+	ASGN,
+	COM
+};

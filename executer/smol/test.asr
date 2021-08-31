@@ -3,4 +3,5 @@
 -width: 300
 -title: "test"
 #body
-xy:3
+x:3
+(3,x) : (1,2,3,x)

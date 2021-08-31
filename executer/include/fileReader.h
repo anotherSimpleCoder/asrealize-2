@@ -9,8 +9,10 @@ struct fileReader {
 	int dataSize; 
 };
 
+
 typedef struct fileReader fileReader;
 
 int read(fileReader* f, string path);
 
 int processValues(fileReader* f, binaryRegister* b);
+
