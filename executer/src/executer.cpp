@@ -7,7 +7,7 @@
 
 using namespace std;
 
-void execute(executer* e, std::vector<entry> r) {
+void execute(executer* e, std::vector<entry> r, bool createPNG) {
 //	const entry meta = {entryType::SEC, SEC_META};
 //	const entry body = {entryType::SEC, SEC_BODY};
 //	const entry alpha = {entryType::SEC, SEC_BODY};
@@ -44,6 +44,9 @@ void execute(executer* e, std::vector<entry> r) {
 		int amount = 0;
 
 		int values[6];
+
+		asrColor* color = NULL;
+		asrVector* vector = NULL;
 
 		if(r[4].content[0] == SEC_BODY) {
 			for(int i = 5; i < size; i++) {
@@ -121,9 +124,9 @@ void execute(executer* e, std::vector<entry> r) {
 						blue = values[4];
 						alpha = values[5];
 
-
-						
-
+						vector = new asrVector(x,y);
+						color  = new asrColor(red, green, blue, alpha);
+						e->asrInstance->assign(color, vector);
 						break;
 
 
@@ -133,6 +136,14 @@ void execute(executer* e, std::vector<entry> r) {
 			}
 		}
 
+	}
+
+	if(createPNG) {
+		e->asrInstance->makePNG(title);
+	}
+
+	else {
+		e->asrInstance->render();
 	}
 }
 

@@ -19,7 +19,7 @@ int main(int argc, char** argv) {
 //	printContentToTokens(&b);	
 	std::vector<entry> reg = processValues(&b);	
 //	printRegister(reg);
-	execute(&e, reg);
+	execute(&e, reg, false);
 	
 	return EXIT_SUCCESS;	
 }

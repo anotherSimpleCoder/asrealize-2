@@ -13,5 +13,5 @@ struct executer {
 typedef struct executer executer;
 
 void printRegister(std::vector<entry> r);
-void execute(executer* e, std::vector<entry> r);
+void execute(executer* e, std::vector<entry> r, bool createPNG);
 string constructString(std::vector<uint16_t> chars, int startPosition, int* endPosition);
