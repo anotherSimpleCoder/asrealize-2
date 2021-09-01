@@ -1,0 +1,7 @@
+#meta
+-height: 300
+-width: 300
+-title: "test"
+#body
+xy:3
+(3,xy):(255,255,0,1)
