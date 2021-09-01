@@ -35,7 +35,8 @@ void execute(executer* e, std::vector<entry> r) {
 
 		string varName = "";
 		int varValue = 0;
-		int end = 0;
+
+		int end = 0; //String end
 		int contentSize = 0;
 
 		int x, y, red, green, blue, alpha = 0;
@@ -59,7 +60,7 @@ void execute(executer* e, std::vector<entry> r) {
 							varName = constructString(e_buf.content, 1, &end);
 						}
 
-						varValue = e_buf.content[end + 1];
+						varValue = e_buf.content[end];
 						
 						if(e->variables.find(varName) == e->variables.end()){
 							e->variables.insert(std::pair<string, int>(varName, varValue));
@@ -68,55 +69,61 @@ void execute(executer* e, std::vector<entry> r) {
 						else {
 							e->variables[varName] = varValue;
 						}
-						cout << varName << ":" << e->variables[varName] << endl;
+					//	cout << varName << ":" << e->variables[varName] << endl;
 						break;
 
 
 					case entryType::COM:
-						//x = 0;
-						//y = 0;
-
-						//red = 0;
-						//green = 0;
-						//blue = 0;
-						//alpha = 0;
-
 						contentSize = e_buf.content.size();
-						
-						nameBuf = "";
-						end = 0;
-						amount = 0;						
+					/*	
+						cout << contentSize << endl;
+						cout << endl;
+						cout << endl;
+					*/
+						for(int j = 0; j < contentSize; j++) {
+							//cout << "content:" << e_buf.content[j] << endl;
+							//cout << endl;
+							//cout << j << endl;
+							//cout << endl;
 
-						for(int i = 0; i < size; i++) {
-							if(e_buf.content[i] == ALPHABETIC) {
-								i++;
-								nameBuf = constructString(e_buf.content, i, &end);
-								i = end;
-								//cout << << nameBuf << endl;
-								//get val and store
-
-								if(e->variables.find(varName) != e->variables.end()) {
-									values[amount] = e->variables[nameBuf];
-									amount++;	
+							if(e_buf.content[j] == ALPHABETIC) {
+								j += 1;
+								nameBuf = constructString(e_buf.content, j, &end);
+								//cout << nameBuf << endl;
+								
+								if(e->variables.find(nameBuf) != e->variables.end()) {
+									varValue = e->variables[nameBuf];
 								}
 								//amount++;
+
+								//cout << amount << ":" << nameBuf << ":" << varValue << endl;
+								values[amount] = varValue;
+								amount++;
+								j = end-1;
 							}
 
 							else {
-								//get val and store
-								//cout << (int)e_buf.content[i] << endl;
-								values[amount] = e_buf.content[i];
+								//cout << amount << ":" << e_buf.content[j] << endl;
+								values[amount] = e_buf.content[j];
 								amount++;
 							}
-
+						}
+/*
+						for(int i = 0; i < amount; i++) {
+							cout << i << ":" << values[i] << endl;
 						}
 
-						//TODO: there is still somethin wrong with fetching values
-						for(int i = 0; i < 6; i++) {
-							cout << values[i] << endl;
-						}
+*/
+						x = values[0];
+						y = values[1];
+						red = values[2];
+						green =  values[3];
+						blue = values[4];
+						alpha = values[5];
 
-						//cout << amount << endl;
+
+						
+
 						break;
 
 
@@ -125,6 +132,7 @@ void execute(executer* e, std::vector<entry> r) {
 				}	
 			}
 		}
+
 	}
 }
 
@@ -139,6 +147,7 @@ string constructString(std::vector<uint16_t> chars, int startPosition, int* endP
 		d++;
 	}
 
+	d += 1;
 	*endPosition = d;
 
 	return res;
