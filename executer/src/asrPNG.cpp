@@ -81,15 +81,18 @@ int asrPNG::writeImg(){
 	for(int y = 0; y < height; y++){
 		for(int x = 0; x < width; x++){
 			asrPixel* p = screen->getPixel(x,y);
-			asrColor* c = p->getColor();
-			
+			asrColor* c = p->getColor();		
+	
 			r = c->getColor(ASR_RED);
 			g = c->getColor(ASR_GREEN);
 			b = c->getColor(ASR_BLUE);
 
-			row[x*3] = r;
-			row[x*3+1] = g;
-			row[x*3+2] = b;
+			//cout << "(" << x << "," << y << ")" << ":" << "(" << (int)r << "," << (int)g << "," << (int)b << ")" << endl;
+
+			row[(x)*3] = r;
+			row[(x)*3+1] = g;
+			row[(x)*3+2] = b;
+
 		}
 		png_write_row(png_ptr, row);
 	}	

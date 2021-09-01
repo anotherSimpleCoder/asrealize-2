@@ -49,4 +49,7 @@ clean:
 	clear
 
 run:
-	./$(BIN_NAME)
+	./$(BIN_NAME) test.asb
+
+runPNG:
+	./$(BIN_NAME) test.asb -png
