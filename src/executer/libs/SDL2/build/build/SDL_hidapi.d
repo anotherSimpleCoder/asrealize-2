@@ -1,0 +1,19 @@
+build/SDL_hidapi.lo: \
+  /home/ams/dev/asrealize-2/src/executer/libs/SDL2/src/hidapi/SDL_hidapi.c \
+  /home/ams/dev/asrealize-2/src/executer/libs/SDL2/src/hidapi/../SDL_internal.h \
+  /home/ams/dev/asrealize-2/src/executer/libs/SDL2/src/hidapi/../dynapi/SDL_dynapi.h \
+  /home/ams/dev/asrealize-2/src/executer/libs/SDL2/src/hidapi/../dynapi/SDL_dynapi_overrides.h \
+  include/SDL_config.h \
+  /home/ams/dev/asrealize-2/src/executer/libs/SDL2/include/SDL_platform.h \
+  /home/ams/dev/asrealize-2/src/executer/libs/SDL2/include/begin_code.h \
+  /home/ams/dev/asrealize-2/src/executer/libs/SDL2/include/close_code.h \
+  /home/ams/dev/asrealize-2/src/executer/libs/SDL2/include/SDL_assert.h \
+  /home/ams/dev/asrealize-2/src/executer/libs/SDL2/include/SDL_config.h \
+  /home/ams/dev/asrealize-2/src/executer/libs/SDL2/include/SDL_log.h \
+  /home/ams/dev/asrealize-2/src/executer/libs/SDL2/include/SDL_stdinc.h \
+  /home/ams/dev/asrealize-2/src/executer/libs/SDL2/include/SDL_loadso.h \
+  /home/ams/dev/asrealize-2/src/executer/libs/SDL2/include/SDL_error.h \
+  /home/ams/dev/asrealize-2/src/executer/libs/SDL2/src/hidapi/SDL_hidapi.h \
+  /home/ams/dev/asrealize-2/src/executer/libs/SDL2/src/hidapi/hidapi/../../core/linux/SDL_udev.h \
+  /home/ams/dev/asrealize-2/src/executer/libs/SDL2/src/hidapi/hidapi/../../core/linux/../../SDL_internal.h \
+  /home/ams/dev/asrealize-2/src/executer/libs/SDL2/src/hidapi/hidapi/hidapi.h

@@ -1,0 +1,33 @@
+build/SDL_hidapi_rumble.lo: \
+  /home/ams/dev/asrealize-2/src/executer/libs/SDL2/src/joystick/hidapi/SDL_hidapi_rumble.c \
+  /home/ams/dev/asrealize-2/src/executer/libs/SDL2/src/joystick/hidapi/../../SDL_internal.h \
+  /home/ams/dev/asrealize-2/src/executer/libs/SDL2/src/joystick/hidapi/../../dynapi/SDL_dynapi.h \
+  /home/ams/dev/asrealize-2/src/executer/libs/SDL2/src/joystick/hidapi/../../dynapi/SDL_dynapi_overrides.h \
+  include/SDL_config.h \
+  /home/ams/dev/asrealize-2/src/executer/libs/SDL2/include/SDL_platform.h \
+  /home/ams/dev/asrealize-2/src/executer/libs/SDL2/include/begin_code.h \
+  /home/ams/dev/asrealize-2/src/executer/libs/SDL2/include/close_code.h \
+  /home/ams/dev/asrealize-2/src/executer/libs/SDL2/include/SDL_assert.h \
+  /home/ams/dev/asrealize-2/src/executer/libs/SDL2/include/SDL_config.h \
+  /home/ams/dev/asrealize-2/src/executer/libs/SDL2/include/SDL_log.h \
+  /home/ams/dev/asrealize-2/src/executer/libs/SDL2/include/SDL_stdinc.h \
+  /home/ams/dev/asrealize-2/src/executer/libs/SDL2/include/SDL_thread.h \
+  /home/ams/dev/asrealize-2/src/executer/libs/SDL2/include/SDL_error.h \
+  /home/ams/dev/asrealize-2/src/executer/libs/SDL2/include/SDL_atomic.h \
+  /home/ams/dev/asrealize-2/src/executer/libs/SDL2/include/SDL_mutex.h \
+  /home/ams/dev/asrealize-2/src/executer/libs/SDL2/include/SDL_timer.h \
+  /home/ams/dev/asrealize-2/src/executer/libs/SDL2/src/joystick/hidapi/SDL_hidapijoystick_c.h \
+  /home/ams/dev/asrealize-2/src/executer/libs/SDL2/include/SDL_joystick.h \
+  /home/ams/dev/asrealize-2/src/executer/libs/SDL2/include/SDL_gamecontroller.h \
+  /home/ams/dev/asrealize-2/src/executer/libs/SDL2/include/SDL_rwops.h \
+  /home/ams/dev/asrealize-2/src/executer/libs/SDL2/include/SDL_sensor.h \
+  /home/ams/dev/asrealize-2/src/executer/libs/SDL2/src/joystick/hidapi/../../hidapi/hidapi/hidapi.h \
+  /home/ams/dev/asrealize-2/src/executer/libs/SDL2/src/joystick/hidapi/../usb_ids.h \
+  /home/ams/dev/asrealize-2/src/executer/libs/SDL2/src/joystick/hidapi/SDL_hidapi_rumble.h \
+  /home/ams/dev/asrealize-2/src/executer/libs/SDL2/src/joystick/hidapi/../../thread/SDL_systhread.h \
+  /home/ams/dev/asrealize-2/src/executer/libs/SDL2/src/joystick/hidapi/../../thread/../SDL_internal.h \
+  /home/ams/dev/asrealize-2/src/executer/libs/SDL2/src/joystick/hidapi/../../thread/SDL_thread_c.h \
+  /home/ams/dev/asrealize-2/src/executer/libs/SDL2/src/joystick/hidapi/../../thread/pthread/SDL_systhread_c.h \
+  /home/ams/dev/asrealize-2/src/executer/libs/SDL2/src/joystick/hidapi/../../thread/pthread/../../SDL_internal.h \
+  /home/ams/dev/asrealize-2/src/executer/libs/SDL2/src/joystick/hidapi/../../thread/../SDL_error_c.h \
+  /home/ams/dev/asrealize-2/src/executer/libs/SDL2/src/joystick/hidapi/../.././SDL_internal.h

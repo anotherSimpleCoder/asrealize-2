@@ -1,15 +1,17 @@
-SDL_FLAGS = -I /usr/local/include/SDL2 -D_REENTRANT
-PNG_FLAGS = -I /usr/local/include/libpng16 -D_REENTRANT
+SDL_FLAGS = -I/usr/local/include/SDL2 -D_REENTRANT 
+PNG_FLAGS = -I /usr/include/libpng -D_REENTRANT
 
-CFLAGS = $(SDL_FLAGS) -I include
+CFLAGS = $(SDL_FLAGS) $(PNG_FLAGS) -I include
 
 OPTIONS = -fsanitize=address
 
 STANDARD = -std=c++17
 
-LIBS = -lSDL2 -lpng
+LIBS = -L/usr/local/lib -Wl,-rpath,/usr/local/lib -Wl,--enable-new-dtags -lSDL2 -lpng
 
 BIN_NAME = asrealize2-executer
+
+WIN_TARGET = -target x86_64-pc-win32-gnu
 
 compile:
 	clang++ $(CFLAGS) -c src/*.cpp $(OPTIONS) $(STANDARD)
@@ -21,6 +23,12 @@ noSan:
 	clang++ $(CFLAGS) -c src/*.cpp $(STANDARD) 
 	clang++ $(CFLAGS) -c main.cpp -o main.o $(STANDARD)
 	clang++ $(LIBS) -o $(BIN_NAME) *.o $(STANDARD)
+	rm *.o
+
+compileWin:
+	clang++ $(WIN_TARGET) $(CFLAGS) -c src/*.cpp $(OPTIONS) $(STANDARD)
+	clang++ $(WIN_TARGET) $(CFLAGS) -c main.cpp -o main.o $(OPTIONS) $(STANDARD)
+	clang++ $(WIN_TARGET) $(LIBS) -o $(BIN_NAME) *.o $(OPTIONS) $(STANDARD)
 	rm *.o
 
 log:
